@@ -1,5 +1,6 @@
 package com.atanmo.gulimall.product.service;
 
+import com.atanmo.gulimall.product.entity.vo.CategoryVo;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.atanmo.gulimall.product.entity.CategoryEntity;
 import com.atanmo.gulimall.common.utils.PageUtils;
@@ -18,6 +19,6 @@ public interface CategoryService extends IService<CategoryEntity> {
 
     PageUtils queryPage(Map<String, Object> params);
 
-    List<CategoryEntity> listWithTree();
+    List<CategoryVo> listWithTree();
 }
 
