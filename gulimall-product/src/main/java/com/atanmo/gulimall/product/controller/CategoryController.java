@@ -17,6 +17,7 @@ import com.atanmo.gulimall.product.service.CategoryService;
 import com.atanmo.gulimall.common.utils.PageUtils;
 import com.atanmo.gulimall.common.utils.R;
 
+import javax.annotation.Resource;
 
 
 /**
@@ -32,13 +33,14 @@ public class CategoryController {
     @Autowired
     private CategoryService categoryService;
 
+
     /**
      * 列表
      */
     @RequestMapping("/list/listWithTree")
     public R list(@RequestParam Map<String, Object> params){
         List<CategoryVo> treeList = categoryService.listWithTree();
-        return R.ok().put("page", page);
+        return R.ok().put("data", treeList);
     }
 
 

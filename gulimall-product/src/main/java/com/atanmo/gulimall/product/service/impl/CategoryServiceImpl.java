@@ -42,17 +42,24 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
         //查出全部的分类数据 并转换为分类VO
         List<CategoryVo> all = BeanCopyUtils.copyBeanList(list(), CategoryVo.class);
         //过滤出全部的root父级数据
-        all.stream().filter(categoryVo -> categoryVo.getParentCid() == 0)
-                .map(categoryVo -> categoryVo.setChildren(getChildrens(categoryVo,all)))
+        List<CategoryVo> treeList = all.stream().filter(categoryVo -> categoryVo.getParentCid() == 0)
+                .map(categoryVo -> categoryVo.setChildren(getChildrens(categoryVo, all)))
+                .sorted((menu1, menu2) -> (menu1.getSort() == null ? 0 : menu1.getSort()) - (menu2.getSort() == null ? 0 : menu2.getSort()))
+                .collect(Collectors.toList());
 
-
-
-        return null;
+        return treeList;
     }
 
-    private List<CategoryVo> getChildrens(CategoryVo categoryVo, List<CategoryVo> all) {
+    private List<CategoryVo> getChildrens(CategoryVo root, List<CategoryVo> all) {
 
-        return null;
+        List<CategoryVo> children = all.stream()
+                .filter(categoryVo -> categoryVo.getParentCid() == root.getCatId())
+                //1、找到子菜单
+                .map(categoryVo -> categoryVo.setChildren(getChildrens(categoryVo,all)))
+                .sorted((menu1,menu2)-> (menu1.getSort()==null?0:menu1.getSort()) - (menu2.getSort()==null?0:menu2.getSort()))
+                .collect(Collectors.toList());
+
+        return children;
     }
 
 }
