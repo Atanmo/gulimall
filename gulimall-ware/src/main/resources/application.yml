@@ -4,6 +4,12 @@ spring:
     url: jdbc:mysql://server.atidea.cn:3306/gulimall_wms?characterEncoding=UTF-8&useSSL=false&serverTimezone=UTC
     username: root
     password: at123123
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+  application:
+    name: gulimall-ware
 
 
 mybatis-plus:

@@ -2,6 +2,7 @@ package com.atanmo.gulimall.product.service.impl;
 
 import com.atanmo.gulimall.common.utils.BeanCopyUtils;
 import com.atanmo.gulimall.product.entity.vo.CategoryVo;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -43,7 +44,10 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
         List<CategoryVo> all = BeanCopyUtils.copyBeanList(list(), CategoryVo.class);
         //过滤出全部的root父级数据
         List<CategoryVo> treeList = all.stream().filter(categoryVo -> categoryVo.getParentCid() == 0)
-                .map(categoryVo -> categoryVo.setChildren(getChildrens(categoryVo, all)))
+                .map(categoryVo -> {
+                    categoryVo.setChildren(getChildrens(categoryVo, all));
+                    return categoryVo;
+                })
                 .sorted((menu1, menu2) -> (menu1.getSort() == null ? 0 : menu1.getSort()) - (menu2.getSort() == null ? 0 : menu2.getSort()))
                 .collect(Collectors.toList());
 
@@ -55,7 +59,11 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
         List<CategoryVo> children = all.stream()
                 .filter(categoryVo -> categoryVo.getParentCid() == root.getCatId())
                 //1、找到子菜单
-                .map(categoryVo -> categoryVo.setChildren(getChildrens(categoryVo,all)))
+                .map(categoryVo -> {
+                    categoryVo.setChildren(getChildrens(categoryVo,all));
+                    categoryVo.setParentName(root.getName());
+                    return categoryVo;
+                })
                 .sorted((menu1,menu2)-> (menu1.getSort()==null?0:menu1.getSort()) - (menu2.getSort()==null?0:menu2.getSort()))
                 .collect(Collectors.toList());
 

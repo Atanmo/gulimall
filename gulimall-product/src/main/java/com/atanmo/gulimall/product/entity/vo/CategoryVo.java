@@ -11,8 +11,8 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class CategoryVo extends CategoryEntity {
 
+public class CategoryVo extends CategoryEntity {
 
     @Accessors(chain = true)
     private List<CategoryVo> children;

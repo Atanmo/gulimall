@@ -27,12 +27,19 @@
 		<velocity.version>1.7</velocity.version>
 		<pagehelper.spring.boot.version>1.2.5</pagehelper.spring.boot.version>
 		<mysql.version>8.0.17</mysql.version>
-		<mssql.version>4.0</mssql.version>
+		<mssql.version>3.0</mssql.version>
 		<oracle.version>11.2.0.3</oracle.version>
 		<mongo.version>3.11.0</mongo.version>
 	</properties>
 
 	<dependencies>
+
+		<dependency>
+			<groupId>com.microsoft</groupId>
+			<artifactId>sqljdbc4</artifactId>
+			<version>3.0</version>
+		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -111,11 +118,11 @@
 			<version>${oracle.version}</version>
 		</dependency>
 		<!-- sqlserver驱动 -->
-		<dependency>
-			<groupId>com.microsoft.sqlserver</groupId>
-			<artifactId>sqljdbc4</artifactId>
-			<version>${mssql.version}</version>
-		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>com.microsoft.sqlserver</groupId>-->
+<!--			<artifactId>sqljdbc4</artifactId>-->
+<!--			<version>${mssql.version}</version>-->
+<!--		</dependency>-->
 		<!-- postgresql驱动 -->
 		<dependency>
 			<groupId>org.postgresql</groupId>
@@ -127,7 +134,13 @@
 			<artifactId>mongo-java-driver</artifactId>
 			<version>${mongo.version}</version>
 		</dependency>
-	</dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.13.1</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 
 	<build>
 		<plugins>
