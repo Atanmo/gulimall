@@ -4,17 +4,15 @@ import java.util.Arrays;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 import com.atanmo.gulimall.product.entity.BrandEntity;
 import com.atanmo.gulimall.product.service.BrandService;
 import com.atanmo.gulimall.common.utils.PageUtils;
 import com.atanmo.gulimall.common.utils.R;
 
+import javax.validation.Valid;
 
 
 /**
@@ -53,8 +51,8 @@ public class BrandController {
     /**
      * 保存
      */
-    @RequestMapping("/save")
-    public R save(@RequestBody BrandEntity brand){
+    @PutMapping("/save")
+    public R save(@Valid @RequestBody BrandEntity brand){
 		brandService.save(brand);
 
         return R.ok();
