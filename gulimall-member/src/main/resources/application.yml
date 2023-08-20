@@ -1,7 +1,7 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://server.atidea.cn:3306/gulimall_sms?characterEncoding=UTF-8&useSSL=false&serverTimezone=UTC
+    url: jdbc:mysql://localhost:33060/gulimall_sms?characterEncoding=UTF-8&useSSL=false&serverTimezone=UTC
     username: root
     password: at123123
 

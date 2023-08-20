@@ -47,7 +47,6 @@ public class AttrAttrgroupRelationController {
     @RequestMapping("/info/{id}")
     public R info(@PathVariable("id") Long id){
 		AttrAttrgroupRelationEntity attrAttrgroupRelation = attrAttrgroupRelationService.getById(id);
-
         return R.ok().put("attrAttrgroupRelation", attrAttrgroupRelation);
     }
 
@@ -57,7 +56,6 @@ public class AttrAttrgroupRelationController {
     @RequestMapping("/save")
     public R save(@RequestBody AttrAttrgroupRelationEntity attrAttrgroupRelation){
 		attrAttrgroupRelationService.save(attrAttrgroupRelation);
-
         return R.ok();
     }
 
@@ -67,7 +65,6 @@ public class AttrAttrgroupRelationController {
     @RequestMapping("/update")
     public R update(@RequestBody AttrAttrgroupRelationEntity attrAttrgroupRelation){
 		attrAttrgroupRelationService.updateById(attrAttrgroupRelation);
-
         return R.ok();
     }
 

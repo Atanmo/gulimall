@@ -3,6 +3,9 @@ package com.atanmo.gulimall.product.controller;
 import java.util.Arrays;
 import java.util.Map;
 
+import cn.hutool.core.util.ObjectUtil;
+import com.atanmo.gulimall.common.vaild.groups.AddGroup;
+import com.atanmo.gulimall.common.vaild.groups.UpdateGroup;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -11,8 +14,6 @@ import com.atanmo.gulimall.product.entity.BrandEntity;
 import com.atanmo.gulimall.product.service.BrandService;
 import com.atanmo.gulimall.common.utils.PageUtils;
 import com.atanmo.gulimall.common.utils.R;
-
-import javax.validation.Valid;
 
 
 /**
@@ -52,7 +53,7 @@ public class BrandController {
      * 保存
      */
     @PutMapping("/save")
-    public R save(@Valid @RequestBody BrandEntity brand){
+    public R save(@Validated(AddGroup.class) @RequestBody BrandEntity brand){
 		brandService.save(brand);
 
         return R.ok();
@@ -62,9 +63,20 @@ public class BrandController {
      * 修改
      */
     @RequestMapping("/update")
-    public R update(@RequestBody BrandEntity brand){
+    public R update(@Validated(UpdateGroup.class) @RequestBody BrandEntity brand){
 		brandService.updateById(brand);
+        return R.ok();
+    }
 
+    /**
+     * 修改
+     */
+    @PostMapping("/updateStatus")
+    public R updateStatus(@RequestBody BrandEntity brand){
+        if (ObjectUtil.isEmpty(brand)){
+            return R.error("显示状态参数为空");
+        }
+        brandService.updateStatus(brand);
         return R.ok();
     }
 
@@ -74,7 +86,6 @@ public class BrandController {
     @RequestMapping("/delete")
     public R delete(@RequestBody Long[] brandIds){
 		brandService.removeByIds(Arrays.asList(brandIds));
-
         return R.ok();
     }
 

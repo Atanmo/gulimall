@@ -1,7 +1,7 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://server.atidea.cn:3306/gulimall_pms?characterEncoding=UTF-8&useSSL=false&serverTimezone=UTC
+    url: jdbc:mysql://localhost:3306/gulimall_pms?characterEncoding=UTF-8&useSSL=false&serverTimezone=UTC
     username: root
     password: at123123
   cloud:
@@ -14,6 +14,8 @@ spring:
 
 
 mybatis-plus:
+  configuration:
+   log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #开启sql日志
   mapper-locations: classpath:/mapper/**/*.xml
   global-config:
     db-config:
