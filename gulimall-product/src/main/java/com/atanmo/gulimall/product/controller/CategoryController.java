@@ -37,7 +37,7 @@ public class CategoryController {
     /**
      * 列表
      */
-    @RequestMapping("/list/listWithTree")
+    @RequestMapping("/list/tree")
     public R list(@RequestParam Map<String, Object> params){
         List<CategoryVo> treeList = categoryService.listWithTree();
         return R.ok().put("data", treeList);
